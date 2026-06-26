@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { History as HistoryIcon, Loader as Loader2 } from 'lucide-react';
+import { Loader as Loader2 } from 'lucide-react';
 import HistoryTable from '../components/HistoryTable';
 import RecommendationCard from '../components/RecommendationCard';
 import ChatWidget from '../components/ChatWidget';

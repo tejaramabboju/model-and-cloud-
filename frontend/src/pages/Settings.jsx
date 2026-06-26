@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Key, CircleCheck as CheckCircle2, Shield, Circle as HelpCircle, HardDrive } from 'lucide-react';
+import { Key, CircleCheck as CheckCircle2, Circle as HelpCircle, HardDrive } from 'lucide-react';
 import axios from 'axios';
 
 export default function Settings() {
