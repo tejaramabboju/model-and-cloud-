@@ -1,16 +1,16 @@
-import { Zap, AlertTriangle, Flame } from 'lucide-react';
+import { Zap, TriangleAlert as AlertTriangle, Flame } from 'lucide-react';
 
 const config = {
   Simple: {
-    className: 'badge-emerald',
+    className: 'bg-emerald-100 text-emerald-700',
     icon: Zap,
   },
   Moderate: {
-    className: 'badge-amber',
+    className: 'bg-amber-100 text-amber-700',
     icon: AlertTriangle,
   },
   Complex: {
-    className: 'badge-rose',
+    className: 'bg-rose-100 text-rose-700',
     icon: Flame,
   },
 };

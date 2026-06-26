@@ -18,13 +18,11 @@ export default function Layout() {
   return (
     <div
       id="layout-root"
-      style={{ display: 'flex', minHeight: '100vh', background: '#0F1117', color: '#c9d1e8' }}
+      style={{ display: 'flex', minHeight: '100vh', background: '#F8F7FF', color: '#4B5563' }}
     >
       <Sidebar />
 
-      {/* Main content area */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow: 'hidden' }}>
-        {/* Topbar */}
         <div className="topbar">
           <span className="page-title">{meta.title}</span>
           {meta.badge ? (
@@ -47,7 +45,6 @@ export default function Layout() {
           ) : null}
         </div>
 
-        {/* Page content */}
         <main style={{ flex: 1, overflowY: 'auto', padding: '24px 28px' }}>
           <Outlet />
         </main>

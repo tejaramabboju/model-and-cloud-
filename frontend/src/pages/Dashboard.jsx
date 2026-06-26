@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  BarChart3,
-  FileText,
-  DollarSign,
-  PiggyBank,
-  Target,
-} from 'lucide-react';
+import { ChartBar as BarChart3, FileText, DollarSign, PiggyBank, Target } from 'lucide-react';
 import {
   BarChart,
   Bar,
@@ -22,16 +16,12 @@ import {
 import StatsCard from '../components/StatsCard';
 import { getDashboardStats } from '../api/client';
 
-const CHART_COLORS = ['#6366F1', '#8b5cf6', '#22D3EE', '#4ade80', '#f97316', '#f87171', '#818CF8', '#67E8F9'];
-const DARK_BG = '#0A0C12';
-const DARK_BORDER = '#1e2130';
-const DARK_GRID = '#1e2130';
-const TICK_COLOR = '#5c6189';
+const CHART_COLORS = ['#C084FC', '#67E8F9', '#6EE7B7', '#FCA5A5', '#FDE68A', '#F59E0B', '#818CF8', '#A78BFA'];
 
 function SkeletonCard() {
   return (
     <div className="kpi-card">
-      <div className="skeleton w-7 h-7 mb-3 rounded-lg" />
+      <div className="skeleton w-8 h-8 mb-3 rounded-xl" />
       <div className="skeleton w-20 h-6 mb-2" />
       <div className="skeleton w-14 h-2" />
     </div>
@@ -41,10 +31,10 @@ function SkeletonCard() {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: '#13152a', border: '0.5px solid #2a2d3a', borderRadius: 8, padding: '8px 12px', fontSize: 11 }}>
-      <p style={{ color: '#e2e8f0', fontWeight: 600, marginBottom: 4 }}>{label || payload[0]?.name}</p>
-      <p style={{ color: '#5c6189' }}>
-        Count: <span style={{ color: '#a5b4fc', fontWeight: 600 }}>{payload[0]?.value}</span>
+    <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '10px 14px', fontSize: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+      <p style={{ color: '#1E1B4B', fontWeight: 700, marginBottom: 4 }}>{label || payload[0]?.name}</p>
+      <p style={{ color: '#6B7280' }}>
+        Count: <span style={{ color: '#7C3AED', fontWeight: 700 }}>{payload[0]?.value}</span>
       </p>
     </div>
   );
@@ -82,13 +72,12 @@ export default function Dashboard() {
 
   return (
     <div id="dashboard-page" className="animate-fade-in">
-      {/* Page Header — title lives in Layout topbar; just add spacing */}
       <div className="mb-6">
       </div>
 
       {/* Error */}
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm">
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm">
           {error}
         </div>
       )}
@@ -103,37 +92,37 @@ export default function Dashboard() {
               title="Total use cases"
               value={stats?.total_use_cases ?? 0}
               icon={FileText}
-              iconBg="#1a1d2e"
-              iconColor="#818cf8"
+              iconBg="#F5F3FF"
+              iconColor="#7C3AED"
               trendText="+6 this week"
-              trendColor="#4ade80"
+              trendColor="#059669"
             />
             <StatsCard
               title="Monthly spend"
               value={`$${(stats?.total_monthly_spend ?? 0).toLocaleString()}`}
               icon={DollarSign}
-              iconBg="#0e1c20"
-              iconColor="#22d3ee"
+              iconBg="#ECFEFF"
+              iconColor="#0891B2"
               trendText="estimated"
-              trendColor="#5c6189"
+              trendColor="#6B7280"
             />
             <StatsCard
               title="Total savings"
               value={`$${(stats?.total_savings ?? 0).toLocaleString()}`}
               icon={PiggyBank}
-              iconBg="#1a120a"
-              iconColor="#f97316"
+              iconBg="#FEF2F2"
+              iconColor="#DC2626"
               trendText="vs baseline"
-              trendColor="#4ade80"
+              trendColor="#059669"
             />
             <StatsCard
               title="Avg confidence"
               value={`${Math.round(stats?.avg_confidence ?? 0)}%`}
               icon={Target}
-              iconBg="#0d1a0e"
-              iconColor="#4ade80"
+              iconBg="#ECFDF5"
+              iconColor="#059669"
               trendText="+3% vs last month"
-              trendColor="#4ade80"
+              trendColor="#059669"
             />
           </>
         )}
@@ -142,19 +131,18 @@ export default function Dashboard() {
       {/* Charts */}
       {!loading && (modelData.length > 0 || cloudData.length > 0) && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Model Distribution Bar Chart */}
           {modelData.length > 0 && (
-            <div id="model-distribution-chart" className="glass-card" style={{ padding: '18px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <span style={{ fontSize: '11.5px', fontWeight: 500, color: '#e2e8f0' }}>Model distribution</span>
-                <span style={{ fontSize: '9.5px', color: '#3d4260' }}>by recommendation count</span>
+            <div id="model-distribution-chart" className="glass-card" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: '#1E1B4B' }}>Model distribution</span>
+                <span style={{ fontSize: '11px', color: '#9CA3AF' }}>by recommendation count</span>
               </div>
-              <ResponsiveContainer width="100%" height={200}>
+              <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={modelData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={DARK_GRID} vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" vertical={false} />
                   <XAxis
                     dataKey="name"
-                    tick={{ fill: TICK_COLOR, fontSize: 10 }}
+                    tick={{ fill: '#6B7280', fontSize: 10 }}
                     axisLine={false}
                     tickLine={false}
                     angle={-15}
@@ -162,13 +150,13 @@ export default function Dashboard() {
                     height={50}
                   />
                   <YAxis
-                    tick={{ fill: TICK_COLOR, fontSize: 10 }}
+                    tick={{ fill: '#6B7280', fontSize: 10 }}
                     axisLine={false}
                     tickLine={false}
                     allowDecimals={false}
                   />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99,102,241,0.06)' }} />
-                  <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={40}>
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(192, 132, 252, 0.06)' }} />
+                  <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={40}>
                     {modelData.map((_, i) => (
                       <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
                     ))}
@@ -178,14 +166,13 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* Cloud Distribution Pie Chart */}
           {cloudData.length > 0 && (
-            <div id="cloud-distribution-chart" className="glass-card" style={{ padding: '18px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <span style={{ fontSize: '11.5px', fontWeight: 500, color: '#e2e8f0' }}>Cloud distribution</span>
-                <span style={{ fontSize: '9.5px', color: '#3d4260' }}>by provider</span>
+            <div id="cloud-distribution-chart" className="glass-card" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: '#1E1B4B' }}>Cloud distribution</span>
+                <span style={{ fontSize: '11px', color: '#9CA3AF' }}>by provider</span>
               </div>
-              <ResponsiveContainer width="100%" height={200}>
+              <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie
                     data={cloudData}
@@ -203,9 +190,9 @@ export default function Dashboard() {
                   </Pie>
                   <Tooltip content={<CustomTooltip />} />
                   <Legend
-                    wrapperStyle={{ fontSize: '10px', color: TICK_COLOR }}
+                    wrapperStyle={{ fontSize: '11px', color: '#6B7280' }}
                     iconType="circle"
-                    iconSize={7}
+                    iconSize={8}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -217,9 +204,9 @@ export default function Dashboard() {
       {/* Empty State */}
       {!loading && !error && modelData.length === 0 && cloudData.length === 0 && (stats?.total_use_cases ?? 0) === 0 && (
         <div className="glass-card" style={{ padding: '48px 24px', textAlign: 'center' }}>
-          <BarChart3 style={{ width: 40, height: 40, color: '#3d4260', margin: '0 auto 16px' }} />
-          <p style={{ fontSize: 14, fontWeight: 600, color: '#5c6189', marginBottom: 6 }}>No data yet</p>
-          <p style={{ fontSize: 12, color: '#3d4260' }}>
+          <BarChart3 style={{ width: 40, height: 40, color: '#C084FC', margin: '0 auto 16px' }} />
+          <p style={{ fontSize: 14, fontWeight: 700, color: '#6B7280', marginBottom: 6 }}>No data yet</p>
+          <p style={{ fontSize: 13, color: '#9CA3AF' }}>
             Submit your first use case to start seeing analytics.
           </p>
         </div>

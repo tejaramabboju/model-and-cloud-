@@ -2,36 +2,36 @@ import { useState } from 'react';
 import { SendHorizontal, ChevronDown, ChevronRight, Settings2 } from 'lucide-react';
 
 const s = {
-  // Form container
   form: { display: 'flex', flexDirection: 'column', gap: 20 },
-  panel: { background: '#0d1117', border: '1px solid #1e2535', borderRadius: 14, padding: '20px 24px' },
+  panel: { background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 16, padding: '20px 24px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' },
   sectionHeader: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', userSelect: 'none', marginBottom: 0 },
-  sectionTitle: { fontSize: 13, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.04em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 },
+  sectionTitle: { fontSize: 13, fontWeight: 700, color: '#6B7280', letterSpacing: '0.04em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 },
   sectionBody: { marginTop: 18, display: 'flex', flexDirection: 'column', gap: 14 },
-  label: { display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 5, letterSpacing: '0.02em' },
-  input: { width: '100%', background: '#0b0f18', border: '1px solid #1e2535', borderRadius: 8, padding: '9px 12px', color: '#e2e8f0', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
-  select: { width: '100%', background: '#0b0f18', border: '1px solid #1e2535', borderRadius: 8, padding: '9px 12px', color: '#e2e8f0', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', cursor: 'pointer' },
-  textarea: { width: '100%', background: '#0b0f18', border: '1px solid #1e2535', borderRadius: 10, padding: '12px 14px', color: '#e2e8f0', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', resize: 'vertical', minHeight: 120 },
+  label: { display: 'block', fontSize: 12, fontWeight: 600, color: '#6B7280', marginBottom: 5, letterSpacing: '0.02em' },
+  input: { width: '100%', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 10, padding: '10px 14px', color: '#1E1B4B', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s' },
+  select: { width: '100%', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 10, padding: '10px 14px', color: '#1E1B4B', fontSize: 13, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', cursor: 'pointer', transition: 'border-color 0.2s, box-shadow 0.2s' },
+  textarea: { width: '100%', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '14px 16px', color: '#1E1B4B', fontSize: 14, outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box', resize: 'vertical', minHeight: 120, transition: 'border-color 0.2s, box-shadow 0.2s' },
   row2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
   radioGroup: { display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 },
   radioBtn: (active) => ({
-    padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: active ? '1.5px solid #6366f1' : '1px solid #1e2535',
-    background: active ? 'rgba(99,102,241,0.15)' : '#0b0f18', color: active ? '#818cf8' : '#64748b', transition: 'all 0.15s'
+    padding: '6px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: active ? '1.5px solid #7C3AED' : '1px solid #E5E7EB',
+    background: active ? '#F5F3FF' : '#FFFFFF', color: active ? '#7C3AED' : '#6B7280', transition: 'all 0.15s'
   }),
   checkGroup: { display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 },
   checkBtn: (active) => ({
-    padding: '5px 12px', borderRadius: 16, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: active ? '1.5px solid #22d3ee' : '1px solid #1e2535',
-    background: active ? 'rgba(34,211,238,0.1)' : '#0b0f18', color: active ? '#22d3ee' : '#64748b', transition: 'all 0.15s'
+    padding: '5px 12px', borderRadius: 16, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: active ? '1.5px solid #22D3EE' : '1px solid #E5E7EB',
+    background: active ? '#ECFEFF' : '#FFFFFF', color: active ? '#0891B2' : '#6B7280', transition: 'all 0.15s'
   }),
-  charCount: { fontSize: 11, color: '#374151', textAlign: 'right', marginTop: 3, fontFamily: 'monospace' },
-  hint: { fontSize: 11, color: '#374151', marginTop: 4, lineHeight: 1.4 },
+  charCount: { fontSize: 11, color: '#9CA3AF', textAlign: 'right', marginTop: 3, fontFamily: 'monospace' },
+  hint: { fontSize: 11, color: '#9CA3AF', marginTop: 4, lineHeight: 1.4 },
   submitBtn: (loading, disabled) => ({
     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-    padding: '13px 28px', background: disabled ? '#1e2535' : 'linear-gradient(135deg,#6366f1,#8b5cf6)',
-    color: disabled ? '#374151' : '#fff', border: 'none', borderRadius: 10, fontSize: 14, fontWeight: 700,
-    cursor: disabled ? 'not-allowed' : 'pointer', transition: 'all 0.2s', width: '100%', marginTop: 4
+    padding: '13px 28px', background: disabled ? '#E5E7EB' : 'linear-gradient(135deg, #7C3AED, #6366F1)',
+    color: disabled ? '#9CA3AF' : '#fff', border: 'none', borderRadius: 12, fontSize: 14, fontWeight: 700,
+    cursor: disabled ? 'not-allowed' : 'pointer', transition: 'all 0.2s', width: '100%', marginTop: 4,
+    boxShadow: disabled ? 'none' : '0 4px 14px rgba(124, 58, 237, 0.3)'
   }),
-  advToggle: { display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', background: '#0b0f18', border: '1px dashed #1e2535', borderRadius: 8, cursor: 'pointer', color: '#64748b', fontSize: 12, fontWeight: 600, userSelect: 'none', width: 'fit-content' },
+  advToggle: { display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', background: '#F5F3FF', border: '1px dashed #C084FC', borderRadius: 8, cursor: 'pointer', color: '#7C3AED', fontSize: 12, fontWeight: 600, userSelect: 'none', width: 'fit-content' },
 };
 
 export default function UseCaseForm({ onSubmit, isLoading, initialDescription = '', initialStructuredFields = {} }) {
@@ -170,14 +170,14 @@ export default function UseCaseForm({ onSubmit, isLoading, initialDescription = 
       {/* ── Section A: Core Description ────────────────────────────────── */}
       <div style={s.panel}>
         <div style={{ marginBottom: 14 }}>
-          <p style={{ fontSize: 15, fontWeight: 700, color: '#e2e8f0', margin: '0 0 4px' }}>Describe your use case</p>
-          <p style={{ fontSize: 12, color: '#475569', margin: 0 }}>
+          <p style={{ fontSize: 16, fontWeight: 700, color: '#1E1B4B', margin: '0 0 4px' }}>Describe your use case</p>
+          <p style={{ fontSize: 13, color: '#6B7280', margin: 0 }}>
             What AI-powered product do you want to build? Include any details about users, data, or scale.
           </p>
         </div>
 
         <div style={{ marginBottom: 12 }}>
-          <label style={s.label}>Project Name <span style={{ color: '#374151' }}>(optional)</span></label>
+          <label style={s.label}>Project Name <span style={{ color: '#9CA3AF' }}>(optional)</span></label>
           <input
             type="text"
             style={s.input}
@@ -185,11 +185,13 @@ export default function UseCaseForm({ onSubmit, isLoading, initialDescription = 
             onChange={e => setProjectName(e.target.value)}
             placeholder="e.g. HR Chatbot, Medical Transcription Tool..."
             disabled={isLoading}
+            onFocus={e => { e.target.style.borderColor = '#7C3AED'; e.target.style.boxShadow = '0 0 0 3px rgba(124, 58, 237, 0.1)'; }}
+            onBlur={e => { e.target.style.borderColor = '#E5E7EB'; e.target.style.boxShadow = 'none'; }}
           />
         </div>
 
         <div>
-          <label style={s.label}>Use case description <span style={{ color: '#6366f1' }}>*</span></label>
+          <label style={s.label}>Use case description <span style={{ color: '#7C3AED' }}>*</span></label>
           <textarea
             id="use-case-textarea"
             style={s.textarea}
@@ -198,6 +200,8 @@ export default function UseCaseForm({ onSubmit, isLoading, initialDescription = 
             placeholder="e.g. An AI-powered customer support chatbot for an e-commerce platform. It should handle order status queries, returns, and complaints. ~5,000 requests/day, EU users, GDPR compliance needed, budget around $300/month..."
             disabled={isLoading}
             maxLength={2000}
+            onFocus={e => { e.target.style.borderColor = '#7C3AED'; e.target.style.boxShadow = '0 0 0 3px rgba(124, 58, 237, 0.1)'; }}
+            onBlur={e => { e.target.style.borderColor = '#E5E7EB'; e.target.style.boxShadow = 'none'; }}
           />
           <div style={s.charCount}>{description.length} / 2000</div>
         </div>
@@ -387,7 +391,9 @@ export default function UseCaseForm({ onSubmit, isLoading, initialDescription = 
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        select option { background: #0b0f18; }
+        select option { background: #FFFFFF; color: #1E1B4B; }
+        select:focus { border-color: #7C3AED; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1); }
+        input[type="number"]:focus { border-color: #7C3AED; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1); }
       `}</style>
     </form>
   );

@@ -1,9 +1,9 @@
-export default function StatsCard({ title, value, icon: Icon, iconBg = '#1a1d2e', iconColor = '#818cf8', trendText, trendColor = '#4ade80' }) {
+export default function StatsCard({ title, value, icon: Icon, iconBg = '#F3E8FF', iconColor = '#7C3AED', trendText, trendColor = '#6EE7B7' }) {
   return (
     <div className="kpi-card">
       <div className="kpi-top">
         <div className="kpi-icon" style={{ backgroundColor: iconBg }}>
-          {Icon && <Icon style={{ width: 15, height: 15, color: iconColor }} />}
+          {Icon && <Icon style={{ width: 18, height: 18, color: iconColor }} />}
         </div>
         {trendText && (
           <span className="kpi-trend" style={{ color: trendColor }}>

@@ -13,13 +13,14 @@ function parseInlineMarkdown(text) {
   const tokens = text.split(boldCodeRegex);
   return tokens.map((token, i) => {
     if (token.startsWith('**') && token.endsWith('**'))
-      return <strong key={i} style={{ color: '#e2e8f0', fontWeight: 800 }}>{token.slice(2, -2)}</strong>;
+      return <strong key={i} style={{ color: '#1E1B4B', fontWeight: 800 }}>{token.slice(2, -2)}</strong>;
     if (token.startsWith('`') && token.endsWith('`'))
-      return <code key={i} style={{ background: '#1e2535', color: '#818cf8', padding: '1px 6px', borderRadius: 4, fontSize: 11, fontFamily: 'monospace' }}>{token.slice(1, -1)}</code>;
+      return <code key={i} style={{ background: '#F5F3FF', color: '#7C3AED', padding: '1px 6px', borderRadius: 4, fontSize: 11, fontFamily: 'monospace' }}>{token.slice(1, -1)}</code>;
     return token;
   });
 }
 
+// Exported for use in ClarificationPanel
 export function formatMessageText(text) {
   if (!text) return '';
   const lines = text.split('\n');
@@ -29,12 +30,12 @@ export function formatMessageText(text) {
   const flushTable = (key) => {
     if (currentTable) {
       const tableEl = (
-        <div key={key} style={{ overflowX: 'auto', margin: '12px 0', background: '#0d1117', border: '1px solid #1e2535', borderRadius: 8 }}>
+        <div key={key} style={{ overflowX: 'auto', margin: '12px 0', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 8, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid #1e2535', background: '#161b22' }}>
+              <tr style={{ borderBottom: '1px solid #E5E7EB', background: '#F5F3FF' }}>
                 {currentTable.headers.map((h, i) => (
-                  <th key={i} style={{ padding: '8px 10px', textAlign: 'left', fontWeight: 'bold', color: '#cbd5e1' }}>
+                  <th key={i} style={{ padding: '8px 10px', textAlign: 'left', fontWeight: 'bold', color: '#1E1B4B' }}>
                     {parseInlineMarkdown(h)}
                   </th>
                 ))}
@@ -42,9 +43,9 @@ export function formatMessageText(text) {
             </thead>
             <tbody>
               {currentTable.rows.map((row, rowIndex) => (
-                <tr key={rowIndex} style={{ borderBottom: rowIndex < currentTable.rows.length - 1 ? '1px solid #1e2535' : 'none' }}>
+                <tr key={rowIndex} style={{ borderBottom: rowIndex < currentTable.rows.length - 1 ? '1px solid #E5E7EB' : 'none' }}>
                   {row.map((cell, cellIndex) => (
-                    <td key={cellIndex} style={{ padding: '8px 10px', color: '#8892b0' }}>
+                    <td key={cellIndex} style={{ padding: '8px 10px', color: '#4B5563' }}>
                       {parseInlineMarkdown(cell)}
                     </td>
                   ))}
@@ -80,27 +81,27 @@ export function formatMessageText(text) {
       flushTable(`table-${i}`);
       
       if (line.startsWith('### ')) {
-        renderedElements.push(<h4 key={i} style={{ color: '#e2e8f0', fontSize: 13, fontWeight: 700, margin: '12px 0 4px' }}>{line.slice(4)}</h4>);
+        renderedElements.push(<h4 key={i} style={{ color: '#1E1B4B', fontSize: 13, fontWeight: 700, margin: '12px 0 4px' }}>{line.slice(4)}</h4>);
       } else if (line.startsWith('## ')) {
-        renderedElements.push(<h3 key={i} style={{ color: '#f1f5f9', fontSize: 14, fontWeight: 800, margin: '16px 0 6px' }}>{line.slice(3)}</h3>);
+        renderedElements.push(<h3 key={i} style={{ color: '#1E1B4B', fontSize: 14, fontWeight: 800, margin: '16px 0 6px' }}>{line.slice(3)}</h3>);
       } else if (line.startsWith('# ')) {
-        renderedElements.push(<h2 key={i} style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 800, margin: '18px 0 8px' }}>{line.slice(2)}</h2>);
+        renderedElements.push(<h2 key={i} style={{ color: '#1E1B4B', fontSize: 16, fontWeight: 800, margin: '18px 0 8px' }}>{line.slice(2)}</h2>);
       } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
         renderedElements.push(
           <div key={i} style={{ display: 'flex', gap: 6, margin: '3px 0' }}>
-            <span style={{ color: '#6366f1', marginTop: 2 }}>•</span>
-            <span style={{ color: '#8892b0', fontSize: 12, lineHeight: 1.6 }}>{parseInlineMarkdown(trimmed.slice(2))}</span>
+            <span style={{ color: '#7C3AED', marginTop: 2 }}>•</span>
+            <span style={{ color: '#4B5563', fontSize: 12, lineHeight: 1.6 }}>{parseInlineMarkdown(trimmed.slice(2))}</span>
           </div>
         );
       } else if (trimmed.match(/^\d+\. /)) {
         renderedElements.push(
           <div key={i} style={{ display: 'flex', gap: 6, margin: '3px 0' }}>
-            <span style={{ color: '#6366f1', fontSize: 11, minWidth: 16 }}>{trimmed.split('.')[0]}.</span>
-            <span style={{ color: '#8892b0', fontSize: 12, lineHeight: 1.6 }}>{parseInlineMarkdown(trimmed.slice(trimmed.indexOf('.') + 2))}</span>
+            <span style={{ color: '#7C3AED', fontSize: 11, minWidth: 16 }}>{trimmed.split('.')[0]}.</span>
+            <span style={{ color: '#4B5563', fontSize: 12, lineHeight: 1.6 }}>{parseInlineMarkdown(trimmed.slice(trimmed.indexOf('.') + 2))}</span>
           </div>
         );
       } else if (trimmed) {
-        renderedElements.push(<p key={i} style={{ color: '#8892b0', fontSize: 12, margin: '4px 0', lineHeight: 1.7 }}>{parseInlineMarkdown(line)}</p>);
+        renderedElements.push(<p key={i} style={{ color: '#4B5563', fontSize: 12, margin: '4px 0', lineHeight: 1.7 }}>{parseInlineMarkdown(line)}</p>);
       }
     }
   }
@@ -111,10 +112,10 @@ export function formatMessageText(text) {
 
 function ChatChart({ chart }) {
   if (!chart || !chart.data || !chart.data.length) return null;
-  const colors = ['#6366F1', '#8B5CF6', '#22D3EE', '#D85A30', '#4ade80'];
+  const colors = ['#C084FC', '#67E8F9', '#6EE7B7', '#FCA5A5', '#FDE68A'];
   return (
-    <div style={{ marginTop: 12, background: '#0d0f1a', border: '1px solid #1e2535', borderRadius: 10, padding: '12px 14px', width: '100%', maxWidth: 340 }}>
-      <p style={{ fontSize: 10, fontWeight: 700, color: '#818cf8', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{chart.title}</p>
+    <div style={{ marginTop: 12, background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '12px 14px', width: '100%', maxWidth: 340, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+      <p style={{ fontSize: 10, fontWeight: 700, color: '#7C3AED', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{chart.title}</p>
       <div style={{ height: 130 }}>
         <ResponsiveContainer width="100%" height="100%">
           {chart.type === 'pie' ? (
@@ -122,13 +123,13 @@ function ChatChart({ chart }) {
               <Pie data={chart.data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={45} label={({ name }) => name.slice(0, 10)} labelLine={false}>
                 {chart.data.map((_, index) => <Cell key={index} fill={colors[index % colors.length]} />)}
               </Pie>
-              <Tooltip formatter={v => [`$${v}`, 'Cost']} />
+              <Tooltip formatter={v => [`${v}`, 'Cost']} />
             </PieChart>
           ) : (
             <BarChart data={chart.data} margin={{ top: 5, right: 5, left: -25, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e2535" />
-              <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#64748B' }} />
-              <YAxis tick={{ fontSize: 9, fill: '#64748B' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+              <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#9CA3AF' }} />
+              <YAxis tick={{ fontSize: 9, fill: '#9CA3AF' }} />
               <Tooltip cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
               <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={24}>
                 {chart.data.map((_, index) => <Cell key={index} fill={colors[index % colors.length]} />)}
@@ -213,18 +214,18 @@ export default function ChatWidget({ useCaseId, initialMessages = [], onNewReque
   return (
     <div className="flex flex-col chat-container" style={{ height: '100%', minHeight: 400 }}>
       {/* Chat header */}
-      <div style={{ padding: '14px 18px', borderBottom: '1px solid #1e2535', background: '#0d0f1a', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTopLeftRadius: 12, borderTopRightRadius: 12 }}>
+      <div style={{ padding: '14px 18px', borderBottom: '1px solid #E5E7EB', background: '#F5F3FF', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Bot style={{ width: 16, height: 16, color: '#818cf8' }} />
-          <span style={{ fontWeight: 700, fontSize: 13, color: '#e2e8f0' }}>AI Advisor Chat</span>
-          <span style={{ fontSize: 10, background: 'rgba(99,102,241,0.15)', color: '#818cf8', padding: '2px 7px', borderRadius: 10, fontWeight: 600 }}>Active Session</span>
+          <Bot style={{ width: 18, height: 18, color: '#7C3AED' }} />
+          <span style={{ fontWeight: 700, fontSize: 14, color: '#1E1B4B' }}>AI Advisor Chat</span>
+          <span style={{ fontSize: 10, background: '#EDE9FE', color: '#7C3AED', padding: '2px 8px', borderRadius: 10, fontWeight: 600, border: '1px solid #C084FC' }}>Active Session</span>
         </div>
         {onNewRequest && (
           <button 
             onClick={onNewRequest} 
-            style={{ fontSize: 11, fontWeight: 600, color: '#818cf8', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+            style={{ fontSize: 12, fontWeight: 600, color: '#7C3AED', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
           >
-            New Request <ArrowRight size={10} />
+            New Request <ArrowRight size={12} />
           </button>
         )}
       </div>
@@ -245,27 +246,27 @@ export default function ChatWidget({ useCaseId, initialMessages = [], onNewReque
                     alignItems: 'center',
                     gap: 6,
                     padding: '6px 12px',
-                    borderRadius: 6,
-                    background: 'rgba(99, 102, 241, 0.15)',
-                    border: '1px solid rgba(99, 102, 241, 0.3)',
-                    color: '#a5b4fc',
+                    borderRadius: 8,
+                    background: '#F5F3FF',
+                    border: '1px solid #C084FC',
+                    color: '#7C3AED',
                     fontSize: 11,
                     fontWeight: 'bold',
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.background = 'rgba(99, 102, 241, 0.25)';
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.5)';
-                    e.currentTarget.style.color = '#fff';
+                    e.currentTarget.style.background = '#EDE9FE';
+                    e.currentTarget.style.borderColor = '#7C3AED';
+                    e.currentTarget.style.color = '#5B21B6';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = 'rgba(99, 102, 241, 0.15)';
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.3)';
-                    e.currentTarget.style.color = '#a5b4fc';
+                    e.currentTarget.style.background = '#F5F3FF';
+                    e.currentTarget.style.borderColor = '#C084FC';
+                    e.currentTarget.style.color = '#7C3AED';
                   }}
                 >
-                  🔄 Apply Switch to {msg.suggested_model ? `model: ${msg.suggested_model}` : `cloud: ${msg.suggested_cloud}`}
+                  Apply Switch to {msg.suggested_model ? `model: ${msg.suggested_model}` : `cloud: ${msg.suggested_cloud}`}
                 </button>
               </div>
             )}
@@ -274,7 +275,7 @@ export default function ChatWidget({ useCaseId, initialMessages = [], onNewReque
         {loading && (
           <div className="chat-bubble assistant" style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '10px 14px' }}>
             {[0, 0.2, 0.4].map((delay, i) => (
-              <span key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: '#5c6189', display: 'inline-block', animation: `bounce 1s ${delay}s infinite` }} />
+              <span key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: '#C084FC', display: 'inline-block', animation: `bounce 1s ${delay}s infinite` }} />
             ))}
           </div>
         )}
@@ -282,7 +283,7 @@ export default function ChatWidget({ useCaseId, initialMessages = [], onNewReque
       </div>
 
       {/* Input area */}
-      <div className="chat-input-area border-t p-3 flex gap-2" style={{ borderColor: '#1e2535', background: '#0d0f1a', borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}>
+      <div className="chat-input-area border-t p-3 flex gap-2" style={{ borderColor: '#E5E7EB', background: '#F5F3FF', borderBottomLeftRadius: 16, borderBottomRightRadius: 16 }}>
         <input
           type="text"
           value={input}
@@ -290,16 +291,16 @@ export default function ChatWidget({ useCaseId, initialMessages = [], onNewReque
           onKeyDown={e => e.key === 'Enter' && handleSend()}
           placeholder="Ask about cost, setup steps, model comparisons..."
           className="chat-input-field flex-1"
-          style={{ background: '#07090e', border: '1px solid #1e2535', borderRadius: 8, padding: '8px 12px', color: '#c9d1e8', fontSize: 13, outline: 'none' }}
+          style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 10, padding: '10px 14px', color: '#1E1B4B', fontSize: 14, outline: 'none' }}
           disabled={loading}
         />
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
           className="btn-primary"
-          style={{ padding: '8px 16px', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer', background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', color: '#fff', border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}
+          style={{ padding: '10px 18px', borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: 'pointer', background: 'linear-gradient(135deg, #7C3AED, #6366F1)', color: '#fff', border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}
         >
-          <Send style={{ width: 12, height: 12 }} />
+          <Send style={{ width: 14, height: 14 }} />
           <span>Send</span>
         </button>
       </div>
