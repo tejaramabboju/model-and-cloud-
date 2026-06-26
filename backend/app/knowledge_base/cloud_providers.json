@@ -1,0 +1,145 @@
+[
+  {
+    "name": "AWS",
+    "market_share": "30%",
+    "description": "Amazon Web Services (AWS) is the global market leader in cloud infrastructure, offering the widest range of over 250 services. It is ideal for large-scale, customized enterprise workloads and complex networking architectures.",
+    "regions": [
+      {
+        "id": "us-east-1",
+        "location": "N. Virginia, USA",
+        "compliance": ["HIPAA", "GDPR", "SOC2", "ISO 27001", "FedRAMP"]
+      },
+      {
+        "id": "eu-west-1",
+        "location": "Ireland, EU",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      },
+      {
+        "id": "ap-south-1",
+        "location": "Mumbai, India",
+        "compliance": ["SOC2", "ISO 27001"]
+      },
+      {
+        "id": "eu-central-1",
+        "location": "Frankfurt, Germany",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      }
+    ],
+    "supported_models": [
+      "Claude Haiku 4.5",
+      "Claude Sonnet 4.6",
+      "Claude 3.5 Sonnet",
+      "Claude 3.5 Haiku",
+      "Amazon Nova Micro",
+      "Amazon Nova Lite",
+      "Amazon Nova Pro",
+      "Llama 3.1 70B",
+      "Llama 3.3 70B",
+      "Mistral Large",
+      "Command R+"
+    ],
+    "pricing_notes": "Pay-as-you-go, Reserved Instances (up to 72% discount), Savings Plans (flexible compute discounts), and Spot Instances (up to 90% discount). Advanced discount tools but requires active cost optimization (FinOps).",
+    "strengths": [
+      "Broadest region coverage",
+      "Most compliance certifications",
+      "Mature ecosystem",
+      "Infrastructure breadth (250+ services)",
+      "Highly customizable VPC networking architecture"
+    ]
+  },
+  {
+    "name": "Azure",
+    "market_share": "20%",
+    "description": "Microsoft Azure is a powerful enterprise-focused cloud platform with a massive global footprint. It excels in hybrid cloud deployments, Microsoft software ecosystem integration (Windows Server, SQL Server, Active Directory), and regulatory compliance.",
+    "regions": [
+      {
+        "id": "eastus",
+        "location": "Virginia, USA",
+        "compliance": ["HIPAA", "GDPR", "SOC2", "ISO 27001", "FedRAMP"]
+      },
+      {
+        "id": "westeurope",
+        "location": "Netherlands, EU",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      },
+      {
+        "id": "centralindia",
+        "location": "Pune, India",
+        "compliance": ["SOC2", "ISO 27001"]
+      },
+      {
+        "id": "germanywestcentral",
+        "location": "Frankfurt, Germany",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      }
+    ],
+    "supported_models": [
+      "GPT-4o Mini",
+      "GPT-4o",
+      "OpenAI o1",
+      "OpenAI o3-mini",
+      "Phi-4",
+      "Llama 3.1 70B",
+      "Llama 3.3 70B",
+      "Mistral Large",
+      "DeepSeek-R1",
+      "DeepSeek-V3"
+    ],
+    "pricing_notes": "Pay-as-you-go, Reserved VM Instances (up to 65% discount), and Spot VMs (up to 80% discount). Azure Hybrid Benefit significantly reduces Windows & SQL licensing costs. Best ROI for enterprises with existing Microsoft agreements.",
+    "strengths": [
+      "Best enterprise integration",
+      "Strong hybrid cloud (Azure Arc, Azure Stack HCI)",
+      "Active Directory integration",
+      "100+ compliance certifications, excellent for regulated industries",
+      "65+ regions globally, strong presence in restricted markets"
+    ]
+  },
+  {
+    "name": "GCP",
+    "market_share": "13%",
+    "description": "Google Cloud Platform (GCP) is a developer-friendly cloud environment focused on cloud-native scalability. It is the industry benchmark for artificial intelligence, machine learning (Vertex AI, TPUs), data engineering (BigQuery), and containerization (GKE).",
+    "regions": [
+      {
+        "id": "us-central1",
+        "location": "Iowa, USA",
+        "compliance": ["HIPAA", "SOC2", "ISO 27001"]
+      },
+      {
+        "id": "europe-west1",
+        "location": "Belgium, EU",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      },
+      {
+        "id": "asia-south1",
+        "location": "Mumbai, India",
+        "compliance": ["SOC2", "ISO 27001"]
+      },
+      {
+        "id": "europe-west3",
+        "location": "Frankfurt, Germany",
+        "compliance": ["GDPR", "SOC2", "ISO 27001"]
+      }
+    ],
+    "supported_models": [
+      "Gemini 1.5 Flash",
+      "Gemini 1.5 Pro",
+      "Gemini 2.5 Flash",
+      "Gemini 2.5 Pro",
+      "Claude Haiku 4.5",
+      "Claude Sonnet 4.6",
+      "Llama 3.1 70B",
+      "Llama 3.3 70B",
+      "Gemma 2 27B",
+      "Qwen 2.5 72B",
+      "DeepSeek-R1",
+      "DeepSeek-V3"
+    ],
+    "pricing_notes": "Pay-as-you-go, Committed Use Discounts (up to 70%), and Preemptible VMs (up to 80% discount). Automatic Sustained Use Discounts applied automatically without long-term commitment. Predictable pricing model.",
+    "strengths": [
+      "Best for ML/AI workloads (Vertex AI, TPUs)",
+      "Strong data analytics (BigQuery)",
+      "Competitive pricing with automatic Sustained Use Discounts",
+      "Kubernetes-native container orchestration (GKE)"
+    ]
+  }
+]
